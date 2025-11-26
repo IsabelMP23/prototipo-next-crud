@@ -1,5 +1,16 @@
 import axios from "axios";
 
+type FlavorTextEntry = {
+  flavor_text: string;
+  language: { name: string };
+};
+
+type PokemonType = {
+  type: {
+    name: string;
+  };
+};
+
 const pokeApi = axios.create({
   baseURL: "https://pokeapi.co/api/v2",
 });
@@ -17,7 +28,7 @@ export const getPokemons = async (limit: number = 20, offset: number = 0) => {
         order: detailsResponse.data.order,
         name: detailsResponse.data.name,
         imagen: detailsResponse.data.sprites.other["official-artwork"].front_default,
-        types: detailsResponse.data.types.map((t: any) => t.type.name),
+        types: detailsResponse.data.types.map((t: PokemonType) => t.type.name),
       };
     })
   );
@@ -34,7 +45,7 @@ export const getPokemonByName = async (name: string) => {
   const entry = pokeEntryResponse.data
 
   const SpanishEntry = entry.flavor_text_entries.find(
-    (flavor: any) => flavor.language.name === "es"
+    (flavor: FlavorTextEntry) => flavor.language.name === "es"
   );
 
   const PokeEntry = SpanishEntry ? SpanishEntry.flavor_text : "No disponible";

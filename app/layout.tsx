@@ -15,9 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Biblioteca Virtual",
+  title: "Pokedex App",
   description:
-    "Explora nuestra colección de libros y conoce más sobre nosotros.",
+    "Explora el mundo pokémon y conoce más sobre ellos.",
 };
 
 export default function RootLayout({
